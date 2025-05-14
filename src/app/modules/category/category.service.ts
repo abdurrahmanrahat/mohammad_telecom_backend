@@ -29,6 +29,7 @@ const getAllCategoriesFromDB = async () => {
     return {
       _id: parent._id as ObjectId,
       title: parent.title,
+      slug: parent.slug,
       subCategories: subCategories,
     };
   };
