@@ -8,6 +8,11 @@ const productSchema: Schema<IProduct> = new Schema<IProduct>(
       required: [true, 'Product name is required'],
       trim: true,
     },
+    slug: {
+      type: String,
+      required: [true, 'Product slug is required'],
+      unique: true,
+    },
     description: {
       type: String,
       required: [true, 'Product description is required'],
