@@ -13,11 +13,6 @@ const orderSchema: Schema<IOrder> = new Schema<IOrder>(
       required: [true, 'Total price is required'],
       min: [0, 'Total price cannot be negative'],
     },
-    discount: {
-      type: Number,
-      default: 0,
-      min: [0, 'Discount cannot be negative'],
-    },
     status: {
       type: String,
       enum: ['pending', 'processing', 'delivered', 'cancelled'],

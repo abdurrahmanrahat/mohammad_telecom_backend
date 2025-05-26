@@ -11,4 +11,16 @@ router.post(
   UserControllers.createUser,
 );
 
+router.get('/current-user', UserControllers.getCurrentUser);
+
+router.get('/', UserControllers.getAllUsers);
+
+router.patch(
+  '/:userId',
+  // ValidateRequest(UserValidations.updateUserValidationSchema),
+  UserControllers.updateUser,
+);
+
+router.delete('/:userId', UserControllers.deleteUser);
+
 export const UserRoutes = router;

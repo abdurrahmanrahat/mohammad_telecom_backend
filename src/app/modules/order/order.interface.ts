@@ -2,8 +2,8 @@ import { Document, Types } from 'mongoose';
 
 export interface IOrder extends Document {
   user: Types.ObjectId;
+  orderItems: Types.ObjectId[]; // array of product IDs
   totalPrice: number;
-  discount: number;
   status: 'pending' | 'processing' | 'delivered' | 'cancelled';
   shipping_address: {
     street: string;
@@ -12,7 +12,6 @@ export interface IOrder extends Document {
     country: string;
     zip_code: string;
   };
-  orderItems: Types.ObjectId[];
   payment: Types.ObjectId;
   isDeleted?: boolean;
 }
