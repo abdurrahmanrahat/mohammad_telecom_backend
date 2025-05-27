@@ -52,7 +52,7 @@ const updateOrder = catchAsync(async (req: Request, res: Response) => {
 });
 
 const deleteOrder = catchAsync(async (req: Request, res: Response) => {
-  const result = await OrderServices.deleteOrderFromDb(req.params.orderId);
+  const result = await OrderServices.deleteOrderIntoDb(req.params.orderId);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,

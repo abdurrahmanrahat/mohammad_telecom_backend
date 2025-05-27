@@ -53,8 +53,8 @@ const updateOrderValidationSchema = z.object({
       country: z.string().min(1).optional(),
       orderNotes: z.string().optional(),
       insideDhaka: z.boolean().optional(),
-      orderItems: z.array(orderItemSchema).optional(),
-      totalPrice: z.number().min(0).optional(),
+      //   orderItems: z.array(orderItemSchema).optional(),
+      //   totalPrice: z.number().min(0).optional(),
       status: z.enum(ORDER_STATUS_VALUES).optional(),
       isDeleted: z.boolean().optional(),
     })
