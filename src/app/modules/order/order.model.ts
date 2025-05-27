@@ -4,6 +4,11 @@ import { IOrder } from './order.interface';
 
 const orderSchema = new Schema<IOrder>(
   {
+    orderNumber: {
+      type: String,
+      required: true,
+      unique: true, // optional but ideal
+    },
     fullName: {
       type: String,
       required: [true, 'Full name is required'],
@@ -58,6 +63,11 @@ const orderSchema = new Schema<IOrder>(
       type: String,
       enum: Object.values(ORDER_STATUS),
       default: ORDER_STATUS.PENDING,
+    },
+    paymentMethod: {
+      type: String,
+      enum: ['CASH-ON-DELIVERY', 'DIGITAL-PAYMENT'],
+      required: [true, 'Payment method is required'],
     },
     isDeleted: {
       type: Boolean,

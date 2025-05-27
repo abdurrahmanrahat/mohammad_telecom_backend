@@ -2,6 +2,7 @@ import { Document, Types } from 'mongoose';
 import { ORDER_STATUS } from './order.constants';
 
 export interface IOrder extends Document {
+  orderNumber: string;
   fullName: string;
   fullAddress: string;
   phoneNo: string;
@@ -12,6 +13,7 @@ export interface IOrder extends Document {
   orderItems: TOrderItem[];
   totalPrice: number;
   status?: keyof typeof ORDER_STATUS;
+  paymentMethod: 'CASH-ON-DELIVERY' | 'DIGITAL-PAYMENT';
   isDeleted?: boolean;
 }
 

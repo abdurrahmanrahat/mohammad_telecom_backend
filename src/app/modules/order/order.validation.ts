@@ -40,6 +40,11 @@ const createOrderValidationSchema = z.object({
     totalPrice: z
       .number({ required_error: 'Total price is required' })
       .min(0, 'Total price must be non-negative'),
+    paymentMethod: z.enum(['CASH-ON-DELIVERY', 'DIGITAL-PAYMENT'], {
+      required_error: 'Payment method is required',
+      invalid_type_error:
+        'Payment method must be either CASH-ON-DELIVERY or DIGITAL-PAYMENT',
+    }),
   }),
 });
 
@@ -55,6 +60,7 @@ const updateOrderValidationSchema = z.object({
     //   orderItems: z.array(orderItemSchema).optional(),
     //   totalPrice: z.number().min(0).optional(),
     status: z.enum(ORDER_STATUS_VALUES).optional(),
+    paymentMethod: z.enum(['CASH-ON-DELIVERY', 'DIGITAL-PAYMENT']).optional(),
     isDeleted: z.boolean().optional(),
   }),
   // .refine((data) => Object.keys(data).length > 0, {

@@ -1,12 +1,15 @@
 import httpStatus from 'http-status';
 import QueryBuilder from '../../builder/QueryBuilder';
 import AppError from '../../errors/AppError';
+import { getNextOrderNumber } from '../../utils/getNextOrderNumber';
 import { Product } from '../product/product.model';
 import { orderSearchableFields } from './order.constants';
 import { IOrder } from './order.interface';
 import { Order } from './order.model';
 
 const createOrderIntoDb = async (payload: IOrder) => {
+  const orderNumber = await getNextOrderNumber();
+
   const session = await Order.startSession();
 
   try {
@@ -26,7 +29,9 @@ const createOrderIntoDb = async (payload: IOrder) => {
       await product.save({ session });
     }
 
-    const createdOrder = await Order.create([payload], { session });
+    const createdOrder = await Order.create([{ ...payload, orderNumber }], {
+      session,
+    });
 
     await session.commitTransaction();
     session.endSession();
