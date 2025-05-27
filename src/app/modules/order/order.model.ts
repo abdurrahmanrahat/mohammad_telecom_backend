@@ -57,7 +57,7 @@ const orderSchema = new Schema<IOrder>(
     status: {
       type: String,
       enum: Object.values(ORDER_STATUS),
-      default: ORDER_STATUS.pending,
+      default: ORDER_STATUS.PENDING,
     },
     isDeleted: {
       type: Boolean,

@@ -44,23 +44,22 @@ const createOrderValidationSchema = z.object({
 });
 
 const updateOrderValidationSchema = z.object({
-  body: z
-    .object({
-      fullName: z.string().min(1).optional(),
-      fullAddress: z.string().min(1).optional(),
-      phoneNo: z.string().min(6).optional(),
-      email: z.string().email().optional(),
-      country: z.string().min(1).optional(),
-      orderNotes: z.string().optional(),
-      insideDhaka: z.boolean().optional(),
-      //   orderItems: z.array(orderItemSchema).optional(),
-      //   totalPrice: z.number().min(0).optional(),
-      status: z.enum(ORDER_STATUS_VALUES).optional(),
-      isDeleted: z.boolean().optional(),
-    })
-    .refine((data) => Object.keys(data).length > 0, {
-      message: 'At least one field must be provided for update',
-    }),
+  body: z.object({
+    fullName: z.string().min(1).optional(),
+    fullAddress: z.string().min(1).optional(),
+    phoneNo: z.string().min(6).optional(),
+    email: z.string().email().optional(),
+    country: z.string().min(1).optional(),
+    orderNotes: z.string().optional(),
+    insideDhaka: z.boolean().optional(),
+    //   orderItems: z.array(orderItemSchema).optional(),
+    //   totalPrice: z.number().min(0).optional(),
+    status: z.enum(ORDER_STATUS_VALUES).optional(),
+    isDeleted: z.boolean().optional(),
+  }),
+  // .refine((data) => Object.keys(data).length > 0, {
+  //   message: 'At least one field must be provided for update',
+  // }),
 });
 
 export const OrderValidations = {

@@ -1,18 +1,18 @@
 export const ORDER_STATUS = {
-  pending: 'pending',
-  processing: 'processing',
-  shipped: 'shipped',
-  delivered: 'delivered',
-  cancelled: 'cancelled',
+  PENDING: 'PENDING',
+  PROCESSING: 'PROCESSING',
+  SHIPPED: 'SHIPPED',
+  DELIVERED: 'DELIVERED',
+  CANCELLED: 'CANCELLED',
 } as const;
 
 // for zod
 export const ORDER_STATUS_VALUES = [
-  'pending',
-  'processing',
-  'shipped',
-  'delivered',
-  'cancelled',
+  'PENDING',
+  'PROCESSING',
+  'SHIPPED',
+  'DELIVERED',
+  'CANCELLED',
 ] as const;
 
 export const orderSearchableFields = ['fullName', 'email', 'phoneNo'];

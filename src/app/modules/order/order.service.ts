@@ -79,11 +79,9 @@ const getSingleOrderFromDb = async (orderId: string) => {
 };
 
 const updateOrderIntoDb = async (orderId: string, payload: Partial<IOrder>) => {
-  const updatedOrder = await Order.findOneAndUpdate(
-    { _id: orderId, isDeleted: false },
-    payload,
-    { new: true },
-  );
+  const updatedOrder = await Order.findByIdAndUpdate(orderId, payload, {
+    new: true,
+  });
 
   if (!updatedOrder) {
     throw new AppError(
