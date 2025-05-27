@@ -3,10 +3,14 @@ import { IProductReview } from './product-review.interface';
 
 const productReviewSchema: Schema<IProductReview> = new Schema<IProductReview>(
   {
-    user: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-      required: [true, 'Review must be associated with a user'],
+    username: {
+      type: String,
+      required: [true, 'Username is required'],
+    },
+    email: {
+      type: String,
+      required: [true, 'Email is required'],
+      trim: true,
     },
     product: {
       type: Schema.Types.ObjectId,
@@ -23,6 +27,10 @@ const productReviewSchema: Schema<IProductReview> = new Schema<IProductReview>(
       type: String,
       required: [true, 'Review text is required'],
       trim: true,
+    },
+    isVerified: {
+      type: Boolean,
+      default: false,
     },
     isDeleted: {
       type: Boolean,

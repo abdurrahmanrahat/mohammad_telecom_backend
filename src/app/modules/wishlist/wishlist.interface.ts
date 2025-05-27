@@ -6,4 +6,4 @@ export interface IWishlist extends Document {
   isDeleted?: boolean;
 }
 
-// make route in users route like: /users/:userId/create-wishlist , then comes rest in same
+//  don't need if login is not required for purchase products

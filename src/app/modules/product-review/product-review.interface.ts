@@ -1,10 +1,12 @@
 import { Document, Types } from 'mongoose';
 
 export interface IProductReview extends Document {
-  user: Types.ObjectId;
+  username: string;
+  email: string;
   product: Types.ObjectId;
   rating: number;
   review: string;
+  isVerified?: boolean;
   isDeleted?: boolean;
 }
 

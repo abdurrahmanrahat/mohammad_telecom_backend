@@ -1,13 +1,54 @@
-import { model, Schema } from 'mongoose';
+import { Schema, model } from 'mongoose';
+import { ORDER_STATUS } from './order.constants';
 import { IOrder } from './order.interface';
 
-const orderSchema: Schema<IOrder> = new Schema<IOrder>(
+const orderSchema = new Schema<IOrder>(
   {
-    user: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-      required: [true, 'Order must be associated with a user'],
+    fullName: {
+      type: String,
+      required: [true, 'Full name is required'],
+      trim: true,
     },
+    fullAddress: {
+      type: String,
+      required: [true, 'Full address is required'],
+    },
+    phoneNo: {
+      type: String,
+      required: [true, 'Phone number is required'],
+    },
+    email: {
+      type: String,
+      required: [true, 'Email address is required'],
+      lowercase: true,
+      trim: true,
+    },
+    country: {
+      type: String,
+      required: [true, 'Country is required'],
+    },
+    orderNotes: {
+      type: String,
+      default: '',
+    },
+    insideDhaka: {
+      type: Boolean,
+      required: [true, 'Shipping zone (inside Dhaka or not) must be specified'],
+    },
+    orderItems: [
+      {
+        product: {
+          type: Schema.Types.ObjectId,
+          ref: 'Product',
+          required: [true, 'Product reference is required'],
+        },
+        quantity: {
+          type: Number,
+          required: [true, 'Quantity is required'],
+          min: [1, 'Quantity must be at least 1'],
+        },
+      },
+    ],
     totalPrice: {
       type: Number,
       required: [true, 'Total price is required'],
@@ -15,43 +56,8 @@ const orderSchema: Schema<IOrder> = new Schema<IOrder>(
     },
     status: {
       type: String,
-      enum: ['pending', 'processing', 'delivered', 'cancelled'],
-      default: 'pending',
-      required: [true, 'Order status is required'],
-    },
-    shipping_address: {
-      street: {
-        type: String,
-        required: [true, 'Shipping street is required'],
-      },
-      city: {
-        type: String,
-        required: [true, 'Shipping city is required'],
-      },
-      state: {
-        type: String,
-        required: [true, 'Shipping state is required'],
-      },
-      country: {
-        type: String,
-        required: [true, 'Shipping country is required'],
-      },
-      zip_code: {
-        type: String,
-        required: [true, 'Shipping ZIP code is required'],
-      },
-    },
-    orderItems: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'OrderItem',
-        required: [true, 'Order must include at least one item'],
-      },
-    ],
-    payment: {
-      type: Schema.Types.ObjectId,
-      ref: 'Payment',
-      required: [true, 'Payment reference is required'],
+      enum: Object.values(ORDER_STATUS),
+      default: ORDER_STATUS.pending,
     },
     isDeleted: {
       type: Boolean,

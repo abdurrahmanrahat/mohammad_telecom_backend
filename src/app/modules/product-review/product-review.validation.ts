@@ -2,7 +2,8 @@ import { z } from 'zod';
 
 const createProductReviewValidationSchema = z.object({
   body: z.object({
-    user: z.string({ required_error: 'User ID is required' }),
+    username: z.string({ required_error: 'Username is required' }),
+    email: z.string().email({ message: 'Invalid email address' }).trim(),
     product: z.string({ required_error: 'Product ID is required' }),
     rating: z
       .number({ required_error: 'Rating is required' })
