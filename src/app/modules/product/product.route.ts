@@ -55,4 +55,9 @@ router.delete(
   ProductReviewControllers.deleteReview,
 );
 
+router.post(
+  '/:productId/reviews/:reviewId/approved',
+  ProductReviewControllers.approvedReview,
+);
+
 export const ProductRoutes = router;

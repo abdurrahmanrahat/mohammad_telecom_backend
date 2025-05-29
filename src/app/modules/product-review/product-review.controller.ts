@@ -70,10 +70,25 @@ const deleteReview = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const approvedReview = catchAsync(async (req: Request, res: Response) => {
+  const result = await ProductReviewServices.approveReview(
+    req.params.productId,
+    req.params.reviewId,
+  );
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Review approved successfully',
+    data: result,
+  });
+});
+
 export const ProductReviewControllers = {
   createReview,
   getAllReviews,
   getSingleReview,
   updateReview,
   deleteReview,
+  approvedReview,
 };
