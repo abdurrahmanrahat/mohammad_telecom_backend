@@ -31,8 +31,8 @@ const getProductsFromDb = async (query: Record<string, unknown>) => {
   return { data, totalCount };
 };
 
-const getSingleProductFromDb = async (productId: string) => {
-  return await Product.findOne({ _id: productId, isDeleted: false });
+const getSingleProductFromDb = async (productSlug: string) => {
+  return await Product.findOne({ slug: productSlug, isDeleted: false });
 };
 
 const updateProductIntoDb = async (

@@ -28,7 +28,7 @@ const getAllProducts = catchAsync(async (req: Request, res: Response) => {
 
 const getSingleProduct = catchAsync(async (req: Request, res: Response) => {
   const result = await ProductServices.getSingleProductFromDb(
-    req.params.productId,
+    req.params.productSlug,
   );
 
   sendResponse(res, {
