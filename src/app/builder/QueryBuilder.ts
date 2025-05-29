@@ -38,23 +38,20 @@ class QueryBuilder<T> {
       'fields',
       'minPrice',
       'maxPrice',
-      'category', // We'll handle category separately
+      'category',
+      'tags',
     ];
     excludeFields.forEach((field) => delete queryObj[field]);
 
     // Price range filtering
     const priceFilter: Record<string, number> = {};
-    if (this.query.minPrice) {
-      priceFilter.$gte = Number(this.query.minPrice);
-    }
-    if (this.query.maxPrice) {
-      priceFilter.$lte = Number(this.query.maxPrice);
-    }
+    if (this.query.minPrice) priceFilter.$gte = Number(this.query.minPrice);
+    if (this.query.maxPrice) priceFilter.$lte = Number(this.query.maxPrice);
     if (Object.keys(priceFilter).length > 0) {
       queryObj.price = priceFilter;
     }
 
-    // Conditional category filtering
+    // Category filtering
     if (this.query.category && allCategories) {
       const categorySlugs = collectCategorySlugs(
         this.query.category as string,
@@ -62,8 +59,14 @@ class QueryBuilder<T> {
       );
       queryObj.category = { $in: categorySlugs };
     } else if (this.query.category) {
-      // Fallback if no tree is provided — treat it as flat filtering
       queryObj.category = this.query.category;
+    }
+
+    // Tags filtering
+    if (this.query.tags) {
+      const tagsArray = (this.query.tags as string).split(',');
+
+      queryObj.tags = { $in: tagsArray };
     }
 
     this.modelQuery = this.modelQuery.find(queryObj as FilterQuery<T>);

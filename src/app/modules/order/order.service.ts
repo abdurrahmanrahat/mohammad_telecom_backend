@@ -25,6 +25,8 @@ const createOrderIntoDb = async (payload: IOrder) => {
         );
       }
 
+      product.salesCount = (product.salesCount as number) + item.quantity;
+
       product.stock -= item.quantity;
       await product.save({ session });
     }
@@ -121,6 +123,8 @@ const deleteOrderIntoDb = async (orderId: string) => {
 
       if (product) {
         product.stock += item.quantity;
+
+        product.salesCount = (product.salesCount as number) - item.quantity;
         await product.save({ session });
       }
     }
