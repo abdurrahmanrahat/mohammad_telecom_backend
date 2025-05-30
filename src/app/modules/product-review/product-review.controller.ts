@@ -12,16 +12,30 @@ const createReview = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     statusCode: httpStatus.CREATED,
     success: true,
-    message: 'Review created successfully',
+    message: 'Review make successfully',
     data: result,
   });
 });
 
+const getAllReviewsByProduct = catchAsync(
+  async (req: Request, res: Response) => {
+    const result = await ProductReviewServices.getReviews(
+      req.params.productId,
+      req.query,
+    );
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'All reviews retrieved successfully',
+      data: result,
+    });
+  },
+);
+
 const getAllReviews = catchAsync(async (req: Request, res: Response) => {
-  const result = await ProductReviewServices.getReviews(
-    req.params.productId,
-    req.query,
-  );
+  const result = await ProductReviewServices.getAllReviews(req.query);
+
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -86,6 +100,7 @@ const approvedReview = catchAsync(async (req: Request, res: Response) => {
 
 export const ProductReviewControllers = {
   createReview,
+  getAllReviewsByProduct,
   getAllReviews,
   getSingleReview,
   updateReview,

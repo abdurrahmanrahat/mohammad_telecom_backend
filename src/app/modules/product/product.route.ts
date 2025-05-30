@@ -38,7 +38,13 @@ router.post(
   ProductReviewControllers.createReview,
 );
 
-router.get('/:productId/reviews', ProductReviewControllers.getAllReviews);
+router.get(
+  '/:productId/reviews',
+  ProductReviewControllers.getAllReviewsByProduct,
+);
+
+router.get('/reviews/all-reviews', ProductReviewControllers.getAllReviews);
+
 router.get(
   '/:productId/reviews/:reviewId',
   ProductReviewControllers.getSingleReview,

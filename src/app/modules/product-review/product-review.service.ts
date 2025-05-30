@@ -36,10 +36,13 @@ const getReviews = async (
   }
 
   const reviewQuery = new QueryBuilder(
-    ProductReview.find({ isDeleted: false, product: productId }),
+    ProductReview.find({
+      isDeleted: false,
+      product: productId,
+    }),
     query,
   )
-    .search(['username', 'email', 'review']) // optional
+    .search(['username', 'email']) // optional
     .filter()
     .paginate();
 
@@ -47,9 +50,31 @@ const getReviews = async (
 
   const totalCount = (
     await new QueryBuilder(
-      ProductReview.find({ isDeleted: false }),
+      ProductReview.find({ isDeleted: false, product: productId }),
       query,
-    ).filter().modelQuery
+    )
+      .search(['username', 'email'])
+      .filter().modelQuery
+  ).length;
+
+  return { data, totalCount };
+};
+
+const getAllReviews = async (query: Record<string, unknown>) => {
+  const reviewQuery = new QueryBuilder(
+    ProductReview.find({ isDeleted: false }),
+    query,
+  )
+    .search(['username', 'email']) // optional
+    .filter()
+    .paginate();
+
+  const data = await reviewQuery.modelQuery.sort({ createdAt: -1 });
+
+  const totalCount = (
+    await new QueryBuilder(ProductReview.find({ isDeleted: false }), query)
+      .search(['username', 'email'])
+      .filter().modelQuery
   ).length;
 
   return { data, totalCount };
@@ -230,6 +255,7 @@ const approveReview = async (productId: string, reviewId: string) => {
 export const ProductReviewServices = {
   createReview,
   getReviews,
+  getAllReviews,
   getReviewById,
   updateReview,
   deleteReview,
