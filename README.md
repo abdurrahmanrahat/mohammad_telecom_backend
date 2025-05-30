@@ -1,68 +1,92 @@
-# Food_Supply_Server
+# PartsShop Backend
 
-## Installation:
+**PartsShop Backend** is the server-side application for the PartsShop e-commerce platform, providing a RESTful API to manage users, products, categories, orders, reviews, and authentication with role-based access control.
 
-1. Clone the repository.
-2. Install dependencies using `npm install`.
-3. Rename `.env.example` to `.env`.
-4. Run the server using `npm run dev`.
+---
 
-## Configuration:
+## 🌟 Features
 
-- Environment Variables:
-  - `PORT`: Port number the server listens on. Default: 3000
-  - `MONGODB_URI`: URI for MongoDB database.
-  - `JWT_SECRET`: Secret key for JWT token generation.
-  - `EXPIRES_IN`: Token expiration time.
+- **Authentication & Authorization:**
 
-## Usage:
+  - JWT-based authentication
+  - Role-based access control (Admin, User)
 
-- API Endpoints:
+- **Product Management:**
 
-  - POST `/api/v1/auth/login`
+  - CRUD operations for products
+  - Image gallery support
 
-    - Description: Authenticates user and returns a JWT token.
-    - Request:
-      ```json
-      {
-        "email": "example@email.com",
-        "password": "password"
-      }
-      ```
-    - Response:
-      ```json
-      {
-        "success": true,
-        "message": "User registered successfully"
-      }
-      ```
+- **Category Management:**
 
-  - POST `/api/v1/users/register`
-    - Description: Registers a new user.
-    - Request:
-      ```json
-      {
-        "name": "John",
-        "email": "example@email.com",
-        "password": "password"
-      }
-      ```
-    - Response:
-      ```json
-      {
-        "success": true,
-        "message": "Login successful",
-        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBoMkBleGFtcGxlLmNvbSIsImlhdCI6MTcwNzg1MDYyMSwiZXhwIjoxNzA3OTM3MDIxfQ.7EahSgmPLPNuZ_T9ok-B6TayWCJVdxPzi_Nx4UfrhvY"
-      }
-      ```
+  - Category and subcategory support
 
-## Dependencies:
+- **Order Management:**
 
-- `express`: Web framework for Node.js.
-- `mongoose`: mongodb object modeling for node.js.
-- `mongodb`: MongoDB driver for Node.js.
-- `bcrypt`: Library for hashing passwords.
-- `cors`: Express middleware for enabling CORS.
-- `dotenv`: Loads environment variables from .env file.
-- `jsonwebtoken`: Library for generating and verifying JWT tokens.
-- `nodemon`: Utility for automatically restarting the server during development.
+  - Create, update, delete orders
+  - Manage order status
+
+- **Review Management:**
+
+  - Submit and manage product reviews
+  - Admin review approval system
+
+- **User Management:**
+
+  - Signup, login
+  - View and manage user profiles
+
+- **Dashboard Analytics:**
+  - Product, order, user statistics
+  - Category-based product charts
+  - Order status-based charts
+
+---
+
+## 📄 Tech Stack
+
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- JWT (JSON Web Token)
+- bcrypt.js (Password hashing)
+- dotenv (Environment variable management)
+
+---
+
+## 🔄 Setup Instructions
+
+1. **Clone the repository:**
+
+```bash
+git clone https://github.com/your-username/partsshop-backend.git
+```
+
+2. **Install dependencies:**
+
+```bash
+npm install
+```
+
+3. **Create environment variables:**
+
+Replace `.env.example` fine into '.env` file in the root directory with the following variables:
+
+```env
+NODE_ENV=development
+PORT=5000
+DATABASE_URL=your_db_url
+BCRYPT_SALT_ROUNDS=8
+JWT_ACCESS_SECRET=secret
+JWT_ACCESS_EXPIRES_IN=7d
+JWT_REFRESH_SECRET=refreshsecret
+JWT_REFRESH_EXPIRES_IN=1y
+GOOGLE_OAUTH_CLIENT_ID=your_client_id
+GOOGLE_OAUTH_CLIENT_SECRET=your_client_secret
+```
+
+4. **Run the project:**
+
+```bash
+npm run start:dev
+```
