@@ -69,7 +69,9 @@ const getAllReviews = async (query: Record<string, unknown>) => {
     .filter()
     .paginate();
 
-  const data = await reviewQuery.modelQuery.sort({ createdAt: -1 });
+  const data = await reviewQuery.modelQuery
+    .populate('product')
+    .sort({ createdAt: -1 });
 
   const totalCount = (
     await new QueryBuilder(ProductReview.find({ isDeleted: false }), query)
