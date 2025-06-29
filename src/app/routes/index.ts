@@ -3,6 +3,7 @@ import { AuthRoutes } from '../modules/auth/auth.route';
 import { CartRoutes } from '../modules/cart/cart.route';
 import { CategoryRoutes } from '../modules/category/category.route';
 import { DiscountRoutes } from '../modules/discount/discount.route';
+import { fileRoutes } from '../modules/file/file.route';
 import { OrderRoutes } from '../modules/order/order.route';
 import { ProductRoutes } from '../modules/product/product.route';
 import { UserRoutes } from '../modules/user/user.route';
@@ -44,6 +45,10 @@ const moduleRoutes = [
   {
     path: '/orders',
     route: OrderRoutes,
+  },
+  {
+    path: '/files',
+    route: fileRoutes,
   },
 ];
 
